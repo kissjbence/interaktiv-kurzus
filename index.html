@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>H5P Interaktív Videó</title>
-    <!-- Lejátszó stíluslapja -->
+    <title>H5P Interaktív Lejátszó</title>
+    <!-- A lejátszó stíluslapja -->
     <link rel="stylesheet" href="h5p-player/styles/h5p.css">
     <style>
         body { margin: 0; padding: 20px; background-color: #f5f5f5; font-family: sans-serif; }
@@ -16,33 +16,27 @@
     <!-- A konténer, amiben a videó megjelenik -->
     <div id="h5p-container"></div>
 
-    <!-- Lejátszó motorja -->
-    <script src="h5p-player/frame.bundle.js"></script>
+    <!-- 1. A fő indítófájl betöltése (Ez hiányzott!) -->
+    <script src="h5p-player/main.bundle.js" charset="UTF-8"></script>
     
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             const el = document.getElementById('h5p-container');
             
-            // Konfiguráció
+            // Konfiguráció az Ön mappaszerkezetéhez igazítva
             const options = {
                 h5pJsonPath: './h5p-tartalom',
-                frameJs: './h5p-player/frame.bundle.js',
-                frameCss: './h5p-player/styles/h5p.css'
+                frameJs: 'h5p-player/frame.bundle.js',
+                frameCss: 'h5p-player/styles/h5p.css'
             };
             
-            // Lejátszó indítása hibakezeléssel
+            // Lejátszó indítása a globális H5PStandalone osztállyal
             try {
-                new H5PStandalone.H5P(el, options)
-                    .then(function() {
-                        console.log("H5P sikeresen betöltve!");
-                    })
-                    .catch(function(err) {
-                        console.error("H5P betöltési hiba:", err);
-                        el.innerHTML = "<p style='color:red; padding:20px;'>Hiba történt a tartalom betöltésekor. Ellenőrizze a mappaneveket!</p>";
-                    });
+                new H5PStandalone.H5P(el, options);
+                console.log("H5P script inicializálva.");
             } catch(e) {
-                console.error("Kritikus hiba:", e);
-                el.innerHTML = "<p style='color:red; padding:20px;'>A lejátszó nem tudott elindulni. Hibás HTML kód?</p>";
+                console.error("Kritikus hiba az indításkor:", e);
+                el.innerHTML = "<p style='color:red; padding:20px;'>Nem sikerült elindítani a lejátszót.</p>";
             }
         });
     </script>
