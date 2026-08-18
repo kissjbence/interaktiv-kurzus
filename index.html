@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <title>H5P Lejátszó</title>
+    <!-- 1. A lejátszó stíluslapja -->
+    <link rel="stylesheet" href="h5p-player/styles/h5p.css">
+</head>
+<body>
+
+    <!-- 2. A konténer, amiben az H5P meg fog jelenni -->
+    <div id="h5p-container"></div>
+
+    <!-- 3. A lejátszó JavaScript fájlja -->
+    <script src="h5p-player/frame.bundle.js"></script>
+    
+    <script>
+        // 4. A lejátszó inicializálása
+        document.addEventListener("DOMContentLoaded", function() {
+            const el = document.getElementById('h5p-container');
+            const options = {
+                h5pJsonPath: './h5p-tartalom', // Ide mutasson a kicsomagolt H5P mappa útvonala
+                frameJs: './h5p-player/frame.bundle.js',
+                frameCss: './h5p-player/styles/h5p.css'
+            };
+            new H5PStandalone.H5P(el, options);
+        });
+    </script>
+</body>
+</html>
