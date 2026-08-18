@@ -13,10 +13,10 @@
 </head>
 <body>
 
-    <!-- A konténer, amiben az H5P megjelenik -->
+    <!-- A konténer, amiben az H5P tartalom megjelenik -->
     <div id="h5p-container"></div>
 
-    <!-- 1. A fő indítófájl betöltése -->
+    <!-- 1. Az Ön verziójának megfelelő fő indítófájl betöltése -->
     <script src="h5p-player/main.bundle.js" charset="UTF-8"></script>
     
     <script>
@@ -30,15 +30,10 @@
                 frameCss: './h5p-player/styles/h5p.css'
             };
             
-            // Lejátszó indítása a megfelelő névterülettel (window.H5PStandalone)
+            // Lejátszó indítása az Ön verziójának megfelelő H5PStandalone névtérrel
             try {
-                if (window.H5PStandalone && window.H5PStandalone.H5P) {
-                    new window.H5PStandalone.H5P(el, options);
-                    console.log("H5P script sikeresen elindult.");
-                } else {
-                    console.error("A H5PStandalone nem található. Hibás a main.bundle.js betöltése?");
-                    el.innerHTML = "<p style='color:red; padding:20px;'>A lejátszó motorja nem töltődött be megfelelően.</p>";
-                }
+                new H5PStandalone.H5P(el, options);
+                console.log("H5PStandalone sikeresen elindítva.");
             } catch(e) {
                 console.error("Kritikus hiba az indításkor:", e);
                 el.innerHTML = "<p style='color:red; padding:20px;'>Nem sikerült inicializálni a lejátszót.</p>";
